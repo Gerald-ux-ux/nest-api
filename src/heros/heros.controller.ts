@@ -1,3 +1,4 @@
+// eslint-disable-next-line prettier/prettier
 import {
   Body,
   Controller,
@@ -6,9 +7,13 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HerosService } from './heros.service';
+import { CreateHeroDto } from './dto/create-hero.dto';
 
 @Controller('heros')
 export class HerosController {
@@ -23,8 +28,9 @@ export class HerosController {
     return this.HerosService.getHero(id);
   }
 
-  @Post('')
-  createHero(@Body() hero) {
+  @Post('/create')
+  @UsePipes(ValidationPipe)
+  createHero(@Body() hero: CreateHeroDto) {
     return this.HerosService.createHero(hero);
   }
   @Put(':id')

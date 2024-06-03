@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import Hero from './schemas/hero.schema';
 import mongoose from 'mongoose';
+import { CreateHeroDto } from './dto/create-hero.dto';
 
 @Injectable()
 export class HerosService {
@@ -18,11 +19,7 @@ export class HerosService {
     return { success: true, data: hero };
   }
 
-  async createHero(heroDetails: {
-    name: string;
-    realName: string;
-    isAvenger: boolean;
-  }) {
+  async createHero(heroDetails: CreateHeroDto) {
     console.log('hero details:', heroDetails);
 
     const hero = await this.heroModel.create(heroDetails);
