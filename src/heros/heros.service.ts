@@ -23,6 +23,7 @@ export class HerosService {
     console.log('hero details:', heroDetails);
 
     const hero = await this.heroModel.create(heroDetails);
+
     return { message: 'Hero Created', data: hero };
   }
 
